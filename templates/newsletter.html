@@ -1,0 +1,58 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <title></title>
+        <style></style>
+    </head>
+    <body>
+        <table border="0" cellpadding="0" cellspacing="0" height="100%" width="100%" id="bodyTable">
+            <tr>
+                <td align="center" valign="top">
+                    <table border="0" cellpadding="20" cellspacing="0" width="600" id="emailContainer">
+                        {% for tournament in tournaments %}
+                            <tr>
+                                <td align="center" valign="top">
+                                    {{ tournament.environment }}
+                                </td>
+                                <td align="center" valign="top">
+                                    {{ tournament.link }}
+                                </td>
+                                <td align="center" valign="top">
+                                    {{ tournament.date }}
+                                </td>
+                                <td align="center" valign="top">
+                                    {{ tournament.location }}
+                                </td>
+                                <td align="center" valign="top">
+                                    {{ tournament.type }}
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </table>
+                    <table border="0" cellpadding="20" cellspacing="0" width="600" id="emailContainer">
+                        {% for match in matches %}
+                            <tr>
+                                <td align="center" valign="top">
+                                    {{ match.receiving_team }}
+                                </td>
+                                <td align="center" valign="top">
+                                    {{ match.visiting_team }}
+                                </td>
+                                <td align="center" valign="top">
+                                    {{ match.datetime }}
+                                </td>
+                                <td align="center" valign="top">
+                                    {{ match.scores }}
+                                </td>
+                                <td align="center" valign="top">
+                                    {{ match.gym }}
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </table>
+                </td>
+            </tr>
+        </table>
+    </body>
+</html>

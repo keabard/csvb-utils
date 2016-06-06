@@ -3,7 +3,7 @@
 TEAMS = {
     'M1': {
         'calendar_name': 'COURBEVOIE SPORTS',
-        'calendar_url': None,
+        'calendar_url': 'http://www.ffvbbeach.org/ffvbapp/resu/vbspo_calendrier.php?saison=2015%2F2016&codent=LIIDF&poule=RMC&calend=COMPLET&equipe=6&x=9&y=5',
         'competition_level': 'Régionale',
         'display_name': 'Senior Masculins 1'
     },
@@ -15,7 +15,7 @@ TEAMS = {
     },
     'F1': {
         'calendar_name': 'COURBEVOIE SPORTS 1',
-        'calendar_url': None,
+        'calendar_url': 'http://www.ffvbbeach.org/ffvbapp/resu/vbspo_calendrier.php?saison=2015%2F2016&codent=LIIDF&poule=RFD&calend=COMPLET&equipe=1&x=10&y=3',
         'competition_level': 'Régionale',
         'display_name': 'Senior Féminines 1'
     },

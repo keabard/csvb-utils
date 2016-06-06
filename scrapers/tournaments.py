@@ -31,6 +31,17 @@ def _guess_tournament_date(day, month):
         date_guess = datetime(now.year+1, month, day)
     return date_guess
 
+def _formatted_response(tournaments):
+    formatted_tournaments = copy.deepcopy(tournaments)
+    for ft in formatted_tournaments:
+        ft['environment'] = unicode(ft['environment'])
+        ft['link'] = unicode(ft['link'])
+        ft['date'] = unicode(ft['date'].date())
+        ft['location'] = ft['location'].decode('utf-8')
+        ft['type'] = ft['type'].decode('utf-8')
+
+    return formatted_tournaments
+
 class TournamentsScraper:
 
     def __init__(self):
@@ -39,7 +50,7 @@ class TournamentsScraper:
     def get_tournaments(self, period=DEFAULT_TOURNAMENTS_PERIOD, from_now=DEFAULT_TOURNAMENTS_FROM_NOW):
         start_date = datetime.today() + from_now
         end_date = start_date + period
-        return [tournament for tournament in self.tournaments if tournament['datetime'] >= start_date and tournament['datetime'] <= end_date]
+        return _formatted_response([tournament for tournament in self.tournaments if tournament['date'] >= start_date and tournament['date'] <= end_date])
 
     def scrap(self):
         html = requests.post(REGION_TOURNAMENTS_URL, data={'searchregion': 17})
@@ -51,10 +62,8 @@ class TournamentsScraper:
             tournament = {
                 "environment": tournament_a.attrs['class'][0],
                 "link": tournament_a.attrs['href'],
-                "datetime": guess_tournament_date(tournament_a.find('div', {'class': 'calendrierjour'}).text.encode('utf-8'), tournament_a.find('div', {'class': 'calendriermois'}).text.encode('utf-8')),
+                "date": _guess_tournament_date(tournament_a.find('div', {'class': 'calendrierjour'}).text.encode('utf-8'), tournament_a.find('div', {'class': 'calendriermois'}).text.encode('utf-8')),
                 "location": tournament_a.find('div', {'class': 'annucontent'}).find('h3').text.encode('utf-8'),
                 "type": tournament_a.find('div', {'class': 'annucontent'}).find('div').text.encode('utf-8')
             }
             self.tournaments.append(tournament)
-
-        return self.tournaments

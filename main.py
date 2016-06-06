@@ -1,24 +1,32 @@
+# -*- coding: utf-8 -*
+
 from mailchimp3 import MailChimp
+from jinja2 import Environment, FileSystemLoader
 
 from config import MailChimpConfig
-from scrapers.matches.scrapers import MatchesScraper
-from scrapers.tournaments.scrapers import TournamentsScraper
+from scrapers.matches import MatchesScraper
+from scrapers.tournaments import TournamentsScraper
 
 matches_scraper = MatchesScraper()
 tournaments_scraper = TournamentsScraper()
 mailchimp_config = MailChimpConfig()
 
-MatchesScraper.scrap()
-TournamentsScraper.scrap()
+matches_scraper.scrap()
+tournaments_scraper.scrap()
 
 client = MailChimp('Keabard', mailchimp_config.apikey)
-print client.templates.all()
+# print client.templates.all()
 
 mailchimp_data = {
-	'results': matches_scraper.get_results(),
+	# 'results': matches_scraper.get_results(),
 	'matches': matches_scraper.get_local_matches(),
 	'tournaments': tournaments_scraper.get_tournaments()
 }
+
+env = Environment(loader=FileSystemLoader('./templates'))
+template = env.get_template('newsletter.html')
+print template.render(**mailchimp_data)
+
 
 #-- TODO
 # Build un template à la MailChimp
