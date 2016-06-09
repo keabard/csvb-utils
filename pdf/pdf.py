@@ -49,21 +49,27 @@ PDF_INPUTS = {
         }
     },
     'text': {
+        'nom_du_gsa': {'x': 300, 'y': 710, 'font': ('Helvetica-Bold', 14)},
         'coordonnees': {
-            'numero_licence': {'x': 17, 'y': 127, 'font': ('Helvetica-Bold', 14)},
-            'nom': {'x': 17, 'y': 127, 'font': ('Helvetica-Bold', 14)},
-            'prenom': {'x': 17, 'y': 127, 'font': ('Helvetica-Bold', 14)},
-            'taille': {'x': 17, 'y': 127, 'font': ('Helvetica-Bold', 14)},
-            'date_naissance': {'x': 17, 'y': 127, 'font': ('Helvetica-Bold', 14)},
-            'adresse': {'x': 17, 'y': 127, 'font': ('Helvetica-Bold', 14)},
-            'code_postal': {'x': 17, 'y': 127, 'font': ('Helvetica-Bold', 14)},
-            'ville': {'x': 17, 'y': 127, 'font': ('Helvetica-Bold', 14)},
-            'telephone': {'x': 17, 'y': 127, 'font': ('Helvetica-Bold', 14)},
-            'portable': {'x': 17, 'y': 127, 'font': ('Helvetica-Bold', 14)},
-            'email': {'x': 17, 'y': 127, 'font': ('Helvetica-Bold', 14)}
+            'numero_licence': {'x': 290, 'y': 644, 'font': ('Helvetica-Bold', 10)},
+            'nom': {'x': 178, 'y': 622, 'font': ('Helvetica-Bold', 10)},
+            'prenom': {'x': 414, 'y': 622, 'font': ('Helvetica-Bold', 10)},
+            'taille': {'x': 184, 'y': 601, 'font': ('Helvetica-Bold', 10)},
+            'date_naissance_jour': {'x': 348, 'y': 601, 'font': ('Helvetica-Bold', 10)},
+            'date_naissance_mois': {'x': 372, 'y': 601, 'font': ('Helvetica-Bold', 10)},
+            'date_naissance_annee': {'x': 404, 'y': 601, 'font': ('Helvetica-Bold', 10)},
+            'adresse': {'x': 198, 'y': 557, 'font': ('Helvetica-Bold', 10)},
+            'code_postal': {'x': 218, 'y': 535, 'font': ('Helvetica-Bold', 10)},
+            'ville': {'x': 355, 'y': 535, 'font': ('Helvetica-Bold', 10)},
+            'telephone': {'x': 172, 'y': 514, 'font': ('Helvetica-Bold', 10)},
+            'portable': {'x': 368, 'y': 514, 'font': ('Helvetica-Bold', 10)},
+            'email': {'x': 182, 'y': 493, 'font': ('Helvetica-Bold', 10)}
         },
         'certificat_medical': {
-            'monsieur_madame': {'x': 17, 'y': 127, 'font': ('Helvetica-Bold', 14)}
+            'monsieur_madame': {'x': 102, 'y': 422, 'font': ('Helvetica-Bold', 10)}
+        },
+        'informations_assurances': {
+            'prenom_nom': {'x': 78, 'y': 296, 'font': ('Helvetica-Bold', 10)}
         }
     }
 }
@@ -74,8 +80,16 @@ input1 = PdfFileReader(open("Formulaire_demande_licences_2016_2017.pdf", "rb"))
 # Step 2
 packet = StringIO.StringIO()
 can = canvas.Canvas(packet, pagesize=letter)
+
+# Fill basic form inputs
 can.setFont('Helvetica-Bold', 14)
-can.drawString(17, 127, 'X')
+can.drawString(290, 712, 'COURBEVOIE VOLLEY-BALL')
+can.drawString(360, 668, '0926073')
+
+# Fill dynamic form inputs
+can.setFont('Helvetica-Bold', 10)
+can.drawString(78, 296, 'X')
+
 can.save()
 packet.seek(0)
 input2 = PdfFileReader(packet)
@@ -96,3 +110,10 @@ output.write(outputStream)
 # read the string object using PdfFileReader(), we'll call this text
 # create a new PDF object using PdfFileWriter(), we'll call this output
 # iterate through input and apply .mergePage(text.getPage(0)) for each page you want the text added to, then use output.addPage() to add the modified pages to a new document
+
+# NOM DU GSA
+# COURBEVOIE VOLLEY-BALL
+
+# NUMERO DU GSA
+# 0926073
+
